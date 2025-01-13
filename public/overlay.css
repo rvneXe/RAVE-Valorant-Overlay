@@ -1,0 +1,76 @@
+@font-face {
+    font-family: 'Tungsten';
+    src: url(./font/tungsten-bold.ttf);
+}
+
+#overlay-frame {
+    width: 100vw;
+    height: 100vh;
+}
+#logoL {
+	left: 763px; top: 88px;
+}
+#logoR {
+	left: 1116px; top: 88px;
+}
+
+svg {
+	position: absolute;
+}
+
+.diamond {
+	opacity: 0;
+	content: url(./img/d0.png);
+}
+.diamond[fill] {
+	opacity: 0;
+	content: url(./img/d1.png);
+}
+.bo1 img[id$="1"] {
+	opacity: 1;
+}
+
+.bo3 img[id$="1"] {
+	opacity: 1;
+}
+.bo3 img[id$="2"] {
+	opacity: 1;
+}
+
+.bo5 img[id$="0"] {
+	opacity: 1;
+}
+.bo5 img[id$="1"] {
+	opacity: 1;
+}
+.bo5 img[id$="2"] {
+	opacity: 1;
+}
+img[id^="mp"] {
+	position: absolute;
+}
+
+.ct {
+	fill: rgb(45, 143, 113);
+}
+.t {
+	fill: rgb(120, 48, 68);
+}
+
+.teamAbbr {
+	font-size: 35px;
+	font-family: 'Tungsten';
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+	text-align: center;
+	line-height: 40px;
+	position: absolute;
+}
+
+.toplogo {
+	position: absolute;
+	width: 41px;
+	height: 41px;
+	content: url(./img/noteam.png);
+	z-index: 45;
+}

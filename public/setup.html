@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Match Setup</title>
+    
+    <link rel="stylesheet" href="setup.css">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+    
+        // Update admin panel UI when state changes
+        function updateAdminUI(state) {
+            document.getElementById('color').value = state.color;
+            document.getElementById('event_name').value = state.event_name;
+            document.getElementById('event_stage').value = state.event_stage;
+            document.getElementById('format-'+state.format).checked = true;
+            document.getElementById('mapnumber').value = state.map;
+            document.getElementById('mapname').value = state.mapname;
+            
+            document.getElementById('nameL').value = state.nameL;
+            document.getElementById('abbrL').value = state.abbrL;
+            document.getElementById('logoL').value = state.logoL;
+            document.getElementById('1L').value = state.p1L;
+            document.getElementById('2L').value = state.p2L;
+            document.getElementById('3L').value = state.p3L;
+            document.getElementById('4L').value = state.p4L;
+            document.getElementById('5L').value = state.p5L;
+            document.getElementById('CL').value = state.CL;
+
+            document.getElementById('nameR').value = state.nameR;
+            document.getElementById('abbrR').value = state.abbrR;
+            document.getElementById('logoR').value = state.logoR;
+            document.getElementById('1R').value = state.p1R;
+            document.getElementById('2R').value = state.p2R;
+            document.getElementById('3R').value = state.p3R;
+            document.getElementById('4R').value = state.p4R;
+            document.getElementById('5R').value = state.p5R;
+            document.getElementById('CR').value = state.CR;
+        }
+    
+        // Initialize the admin panel with the current state
+        socket.on('initialize-overlay', (state) => {
+            updateAdminUI(state);
+        });
+
+        // Listen for updates from the server
+        socket.on('admin-update', (state) => {
+            updateAdminUI(state);
+        });
+    
+        // Send commands from admin panel
+        function sendCommand(action, value) {
+            socket.emit('admin-command', { action, value });
+        }
+
+        function update(target, source) {
+            var value = document.getElementById(source).value;
+            socket.emit('admin-command', { action:'update', target:target, value:value });
+        }
+
+        function updatePlayers(t) {
+            let i = 1;
+            while (i < 6) {
+                var input = document.getElementById(i+t).value;
+                socket.emit('admin-command', { action:'update-text', target:"p"+i+t, value:input });
+                i++;
+            }
+        }
+
+        function updateColor() {
+            var color = document.querySelector("#color-picker").value;
+            socket.emit('admin-command', { action:'update-color', value:color });
+        }
+
+        function changeFormat() {
+            if(document.getElementById('format-bo1').checked) {  
+                socket.emit('admin-command', { action:'apply-format', value:"bo1" });
+            }   
+            else if(document.getElementById('format-bo3').checked) { 
+                socket.emit('admin-command', { action:'apply-format', value:"bo3" });
+            }   
+            else if(document.getElementById('format-bo5').checked) {  
+                socket.emit('admin-command', { action:'apply-format', value:"bo5" });
+            }   
+        }
+
+        // Send commands from admin panel
+        function sendCommand(action, value) {
+            socket.emit('admin-command', { action:action, value:value });
+        }
+    </script>
+</head>
+<body>
+    <h1>Match Setup</h1>
+    <button onclick="sendCommand('reload-file', '')">Reload Config file</button></br>
+    Format: 
+    <input type="radio" id="format-bo1" name="format" value="bo1" />
+    <label for="format">Bo1</label>
+    <input type="radio" id="format-bo3" name="format" value="bo3" />
+    <label for="format">Bo3</label>
+    <input type="radio" id="format-bo5" name="format" value="bo5" />
+    <label for="format">Bo5</label><button onclick="changeFormat()">Apply (Resets Map Score)</button></br>
+
+    Event Name: <input type="text" maxlength="30" id="event_name"/><button onclick="update('event_name', 'event_name')">Set</button></br>
+    Event Stage: <input type="text" maxlength="30" id="event_stage"/><button onclick="update('event_stage', 'event_stage')">Set</button></br>
+    Accent Color: <input type="color" id="color" name="color"/><button onclick="updateColor()">Apply</button></br>
+    Map: <input type="text" maxlength="30" id="mapnumber"/><button onclick="update('map', 'mapnumber')">Set</button></br>
+    <input type="text" maxlength="30" id="mapname"/><button onclick="update('mapname', 'mapname')">Set</button></br>
+
+    <h2>Left Team</h2>
+    Full Name: <input type="text" maxlength="16" id="nameL"/><button onclick="update('nameL', 'nameL')">Set</button></br>
+    Tag: <input type="text" maxlength="4" id="abbrL"/><button onclick="update('abbrL', 'abbrL')">Set</button></br>
+    Logo (/public/userdata/*): <input type="text" maxlength="100" id="logoL"/><button onclick="update('logoL', 'logoL')">Set</button></br>
+    Player 1: <input type="text" maxlength="16" id="1L"/></br>
+    Player 2: <input type="text" maxlength="16" id="2L"/></br>
+    Player 3: <input type="text" maxlength="16" id="3L"/></br>
+    Player 4: <input type="text" maxlength="16" id="4L"/></br>
+    Player 5: <input type="text" maxlength="16" id="5L"/><button onclick="updatePlayers('L')">Set All</button></br>
+    Coach: <input type="text" maxlength="16" id="CL"/><button onclick="update('CL', 'CL')">Set</button></br>
+
+    <h2>Right Team</h2>
+    Full Name: <input type="text" maxlength="16" id="nameR"/><button onclick="update('nameR', 'nameR')">Set</button></br>
+    Tag: <input type="text" maxlength="4" id="abbrR"/><button onclick="update('abbrR', 'abbrR')">Set</button></br>
+    Logo (/public/userdata/*): <input type="text" maxlength="100" id="logoR"/><button onclick="update('logoR', 'logoR')">Set</button></br>
+    Player 1: <input type="text" maxlength="16" id="1R"/></br>
+    Player 2: <input type="text" maxlength="16" id="2R"/></br>
+    Player 3: <input type="text" maxlength="16" id="3R"/></br>
+    Player 4: <input type="text" maxlength="16" id="4R"/></br>
+    Player 5: <input type="text" maxlength="16" id="5R"/><button onclick="updatePlayers('R')">Set All</button></br>
+    Coach: <input type="text" maxlength="16" id="CR"/><button onclick="update('CR', 'CR')">Set</button></br>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "rave-valorant-hud",
+  "version": "1.0.0",
+  "description": "https://github.com/rvneXe/RAVE-Valorant-HUD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "RVNeXe",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}

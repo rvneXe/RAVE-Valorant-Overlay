@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin</title>
+    
+    <link rel="stylesheet" href="admin.css">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        let winby = {"bo5": "3", "bo3": "2", "bo1": "1"};
+    
+        // Update admin panel UI when state changes
+        function updateAdminUI(state) {
+            document.getElementById('matchtitle').innerText = state.event_name + ' - ' + state.event_stage;
+            document.getElementById('map').innerText = 'Map '+ state.map + ': ' + state.mapname + ' - Half ' + state.half;
+
+            document.getElementById('tnameL').innerText = state.nameL.toUpperCase();
+            document.getElementById('abbrL').innerText = state.abbrL;
+            document.getElementById('logoL').style = `content: url("${state.logoL}")`;
+            document.getElementById('scoreL').innerText = "■".repeat(state.scoreL) + "□".repeat(winby[state.format] - state.scoreL);
+
+            document.getElementById('tnameR').innerText = state.nameR.toUpperCase();
+            document.getElementById('abbrR').innerText = state.abbrR;
+            document.getElementById('logoR').style = `content: url("${state.logoR}")`;
+            document.getElementById('scoreR').innerText = "■".repeat(state.scoreR) + "□".repeat(winby[state.format] - state.scoreR);
+        }
+    
+        // Initialize the admin panel with the current state
+        socket.on('initialize-overlay', (state) => {
+            updateAdminUI(state);
+        });
+    
+        // Listen for updates from the server
+        socket.on('admin-update', (state) => {
+            updateAdminUI(state);
+        });
+    
+        // Send commands from admin panel
+        function sendCommand(action, value) {
+            socket.emit('admin-command', { action:action, value:value });
+        }
+
+        function update(target, source) {
+            try {
+                var value = document.getElementById(source).value;
+            } catch(e) {
+                value = source;
+            }
+            socket.emit('admin-command', { action:'update', target:target, value:value });
+        }
+    </script>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <h2 id="matchtitle">Event name - Event stage</h2>
+    <h2 id="map">Map x: Map</h2>
+    <button onclick="sendCommand('reload-file', '')">Reload Config file</button></br>
+    <button onclick="update('half', '1')">First Half (Defenders left)</button>
+    <button onclick="update('half', '2')">Second Half (Defenders right)</button>
+    <h1 class="tungsten"><img id="logoL" class="logo_s" /> <span id="tnameL">Team Left</span> =<span id="abbrL">LEFT</span></h1>
+    <span id="lscoreL">Maps won: <span id="scoreL"></span></span><button onclick="sendCommand('score-add', 'L')">+</button><button onclick="sendCommand('score-rem', 'L')">-</button>
+    
+    <h1 class="tungsten"><img id="logoR" class="logo_s" /> <span id="tnameR">Team Right</span> =<span id="abbrR">RAYT</span></h1>
+    <span id="lscoreR">Maps won: <span id="scoreR"></span></span><button onclick="sendCommand('score-add', 'R')">+</button><button onclick="sendCommand('score-rem', 'R')">-</button>
+</body>
+</html>
