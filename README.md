@@ -7,7 +7,9 @@ Currently, due to VALORANT Client's limitations, there's no automatic game feeds
 This tool uses **React js**. Everything is controlled through 2 HTML pages for **Administration** and a **Match setup**. The Overlay itself is accessible as another HTML page, which can be used in OBS Browser Source, for example.
 
 ## Screenshots
+<details><summary>Click to view</summary>
 ![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/screenshot1.png?raw=true)
+</details>
 
 # Getting Started
 
