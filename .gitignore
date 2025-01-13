@@ -1,7 +1,3 @@
 node_modules/*
 *_prototype*
-
-*.ttf
-*.otf
-*.woff2
 sample*
