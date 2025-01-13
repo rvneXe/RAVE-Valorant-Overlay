@@ -8,6 +8,7 @@ This tool uses **React js**. Everything is controlled through 2 HTML pages for *
 
 ## Screenshots
 <details><summary>Click to view</summary>
+
 ![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/screenshot1.png?raw=true)
 </details>
 
