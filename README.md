@@ -2,12 +2,15 @@
 
 A manually-controlled Observer HUD to be used for Valorant streaming and observing.
 
-Currently, due to VALORANT Client's limitations, there's no automatic game feeds; Everything on this Tool is manually controlled. It can display **Team Name**, **Logo**, and **map score** for now.
+Currently, due to VALORANT Client's limitations, there's no automatic game feeds; Everything on this Tool is manually controlled through 2 HTML pages for **Administration** and a **Match setup**. The Overlay itself is accessible as another HTML page, which can be used in OBS Browser Source, for example.
 
-This tool uses **React js**. Everything is controlled through 2 HTML pages for **Administration** and a **Match setup**. The Overlay itself is accessible as another HTML page, which can be used in OBS Browser Source, for example.
+## Features
+* Team Information (Name, Logo, Map score) with Side-Switching feature.
+* Timeout indicator (Team, Side and their remaining timeouts)
 
 ## Screenshots
 ![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/heading.png?raw=true)
+![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/timeout.png?raw=true)
 <details><summary>Click to view more</summary>
 
 ![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/screenshot1.png?raw=true)
