@@ -69,4 +69,4 @@ This tool is available for everyone under GPL-3.0 License. _(TLDR: u can copy, m
 
 # Fonts License
 
-I did include some fonts (like `Tungsten`) with this repository, to use in this project and it's purpose only. Any other usage is not intended by me, and will not be my fault, and I'll not be responsible for any illegal usage of those fonts.
+I did include some fonts (`Tungsten` & `DIN Next`) with this repository, to use in this project and it's purpose only. Any other usage is not intended by me, and will not be my fault, and I'll not be responsible for any illegal usage of those fonts.

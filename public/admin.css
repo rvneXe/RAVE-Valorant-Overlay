@@ -2,7 +2,31 @@
     font-family: 'Tungsten';
     src: url(./font/tungsten-bold.ttf);
 }
-.tungsten { font-family: 'Tungsten';}
+@font-face {
+    font-family: 'DIN Light';
+    src: url(./font/din-light.otf);
+}
+@font-face {
+    font-family: 'DIN Regular';
+    src: url(./font/din-regular.otf);
+}
+@font-face {
+    font-family: 'DIN Medium';
+    src: url(./font/din-medium.otf);
+}
+
+.tung {
+	font-family: 'Tungsten';
+}
+.din0 {
+	font-family: 'DIN Light';
+}
+.din1 {
+	font-family: 'DIN Regular';
+}
+.din2 {
+	font-family: 'DIN Medium';
+}
 
 .logo_s {
     width: 30px;
