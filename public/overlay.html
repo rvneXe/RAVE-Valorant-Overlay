@@ -67,6 +67,30 @@
             document.getElementById('abbrR').innerHTML = state.abbrR;
             document.getElementById('logoR').style = `content: url("${state.logoR}")`;
             setMapScore('R', state.format, state.scoreR);
+
+            if (state.timeout.isActive == 1) {
+                document.getElementById('ttname').innerText = state["name"+state.timeout.team];
+                document.getElementById('ttused').innerText = (state.timeout.max - state.timeout[state.timeout.team+"_remain"]) + "/" + state.timeout.max;
+                document.getElementById('ttlogo').style = `content: url("${state["logo"+state.timeout.team]}")`;
+                document.getElementById('ttglow').classList = "ctglow ttt";
+                if ((state.half == 1 && state.timeout.team == "R") || (state.half == 2 && state.timeout.team == "L")) {
+                    document.getElementById('ttglow').classList = "tglow ttt";
+                }
+                console.log(document.getElementsByClassName('ttt'));
+                document.querySelectorAll('.ttt').forEach(element => {
+                    element.setAttribute("show", "");
+                });
+                document.querySelectorAll('.ttn').forEach(element => {
+                    element.style.display = "block";
+                });
+            } else {
+                document.querySelectorAll('.ttt').forEach(element => {
+                    element.removeAttribute("show", "");
+                });
+                document.querySelectorAll('.ttn').forEach(element => {
+                    element.style.display = "none";
+                });
+            }
         }
 
         // Set up the overlay based on the server's state
@@ -117,12 +141,12 @@
 <body>
     <div id="overlay-frame">
         <div>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55px"
-                height="55px" id="logoplateL" style="left: 756px; top: 81px; z-index: 39;">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55px" height="55px" id="logoplateL" 
+            style="left: 756px; top: 81px; z-index: 39;">
                 <path fill-rule="evenodd" clip-rule="evenodd" fill="rgb(14, 24, 32)"
                     d="M0.0,8 L8,0.0 L47,0.0 L55,8 L55,55 L8,55 L0.0,47 L0.0,8 Z" />
             </svg>
-            <img class="toplogo" id="logoL" style="left: 763px; top: 88px;">
+            <img class="logo" id="logoL" style="left: 763px; top: 88px;">
             <svg class="ct" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                 width="117px" height="40px" id="nameplateL" style="left: 811px; top: 96px; z-index: 39;">
                 <path fill-rule="evenodd" clip-rule="evenodd" 
@@ -130,30 +154,30 @@
             </svg>
             <div class="teamAbbr" id="abbrL" style="left: 811px; top: 96px; width: 100px; height: 40px; z-index: 41;">
                 FNC</div>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px"
-                height="40px" style="left: 911px; top: 96px; z-index: 40;">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="40px" 
+            style="left: 911px; top: 96px; z-index: 40;">
                 <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
                     d="M17.999,39.999 L17.0,39.999 L17.0,18.0 L17.0,18.0 L0.0,0.999 L0.999,0.0 L18.0,17.0 L18.0,18.0 L17.999,39.999 Z" />
             </svg>
 
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px"
-                height="40px" style="left: 991px; top: 96px; z-index: 40;">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="40px" 
+            style="left: 991px; top: 96px; z-index: 40;">
                 <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
                     d="M0.999,18.0 L0.999,39.999 L0.0,39.999 L0.0,18.0 L0.0,17.0 L17.0,0.0 L18.0,0.999 L0.999,18.0 Z" />
             </svg>
             <div class="teamAbbr" id="abbrR" style="left: 1009px; top: 96px; width: 100px; height: 40px; z-index: 41;">
                 LOUD</div>
-            <svg class="t" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                width="118px"height="40px" id="nameplateR" style="left: 992px; top:96px">
+            <svg class="t" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="118px" height="40px" id="nameplateR" 
+            style="left: 992px; top:96px">
                 <path fill-rule="evenodd" 
                     d="M117,0.0 L17,0.0 L0.10,16.989 L0.0,40 L117,40 L117,0.0 Z" />
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55px"
-                height="55px" id="logoplateR" style="left: 1109px; top:81px;">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55px" height="55px" id="logoplateR" 
+            style="left: 1109px; top:81px;">
                 <path fill-rule="evenodd" fill="rgb(14, 24, 32)"
                     d="M54.999,7.999 L46.999,0.0 L7.999,0.0 L0.0,7.999 L0.0,54.999 L46.999,54.999 L54.999,46.999 L54.999,7.999 Z" />
             </svg>
-            <img class="toplogo" id="logoR" style="left: 1116px; top: 88px;">
+            <img class="logo" id="logoR" style="left: 1116px; top: 88px;">
         </div>
         <div>
             <div id="map-points" class="bo3">
@@ -165,6 +189,23 @@
                 <img class="diamond" id="mpR1" style="left: 1071px; top: 75px;">
                 <img class="diamond" id="mpR2" style="left: 1089px; top: 75px;">
             </div>
+        </div>
+        <div id="timeout">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600px" height="6px" id="ttline"
+            class="ttt" style="left: 661px; top: 383px; z-index: 42;">
+                <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                    d="M0.0,6.0 L0.0,0.0 L600.0,0.0 L600.0,6.0 L589.0,6.0 L585.0,2 L15,2 L10.999,6.0 L0.0,6.0 Z" />
+            </svg>
+            <div class="ttt" style="left: 661px; top: 383px; z-index: 40; text-align: center; background-color: rgb(14, 24, 32); " id="ttbase"></div>
+            <div style="left: 661px; top: 383px; z-index: 42; text-align: center;" id="tttext" class="ttt">
+                <div class="tung" style="font-size: 105px; text-align: center; color: #ffffff; line-height: 100px;">TIMEOUT</br></div>
+                <div class="din0" style="font-size: 32px; color: #ffffff;" id="ttname">TEAM</div>
+            </div>
+            <div class="ctglow ttt" style="opacity: 0.3; position: absolute; left: 661px; top: 384px; width: 600px; height: 147px; z-index: 41;" id="ttglow"></div>
+            <img class="logo ttlogo ttt" id="ttlogo">
+            <div class="din0 ttt" style="line-height: 1; text-align: center; position: absolute; font-size: 25px; white-space: pre-line;
+            top: 435px; left: 1183px; color: #bfbfbf; z-index: 42;">Used
+                <span id="ttused">0/0</span></div>
         </div>
 </body>
 

@@ -1,17 +1,17 @@
 {
   "format": "bo5",
-  "half": "1",
-  "map": "4",
+  "half": "2",
+  "map": 4,
   "mapname": "Lotus",
   "event_name": "Valorant Champions 2024",
   "event_stage": "Playoffs: Lower Final",
   "color": "#b6a56d",
   "timeout": {
-    "isActive": "0",
+    "max": 2,
+    "isActive": 0,
     "team": "L",
-    "side": "CT",
-    "L_remain": "2",
-    "R_remain": "2"
+    "L_remain": 2,
+    "R_remain": 2
   },
   "nameL": "LEVIATÁN",
   "abbrL": "LEV",

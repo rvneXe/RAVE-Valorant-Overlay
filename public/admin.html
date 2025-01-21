@@ -16,18 +16,24 @@
     
         // Update admin panel UI when state changes
         function updateAdminUI(state) {
+            let tm = '';
+            if (state.timeout.isActive == 1) {
+                tm = " - TIMEOUT ACTIVE: " + state["name"+state.timeout.team].toUpperCase()
+            }
             document.getElementById('matchtitle').innerText = state.event_name + ' - ' + state.event_stage;
-            document.getElementById('map').innerText = 'Map '+ state.map + ': ' + state.mapname + ' - Half ' + state.half;
+            document.getElementById('map').innerText = 'Map '+ state.map + ': ' + state.mapname + ' - Half ' + state.half + tm;
 
             document.getElementById('tnameL').innerText = state.nameL.toUpperCase();
             document.getElementById('abbrL').innerText = state.abbrL;
             document.getElementById('logoL').style = `content: url("${state.logoL}")`;
             document.getElementById('scoreL').innerText = "■".repeat(state.scoreL) + "□".repeat(winby[state.format] - state.scoreL);
+            document.getElementById('remL').innerText = state.timeout.L_remain;
 
             document.getElementById('tnameR').innerText = state.nameR.toUpperCase();
             document.getElementById('abbrR').innerText = state.abbrR;
             document.getElementById('logoR').style = `content: url("${state.logoR}")`;
             document.getElementById('scoreR').innerText = "■".repeat(state.scoreR) + "□".repeat(winby[state.format] - state.scoreR);
+            document.getElementById('remR').innerText = state.timeout.R_remain;
         }
     
         // Initialize the admin panel with the current state
@@ -57,15 +63,19 @@
 </head>
 <body>
     <h1>Admin Panel</h1>
-    <h2 id="matchtitle">Event name - Event stage</h2>
-    <h2 id="map">Map x: Map</h2>
+    <h2 class="din1" id="matchtitle">Event name - Event stage</h2>
+    <h2 class="din1" id="map">Map x: Map</h2>
     <button onclick="sendCommand('reload-file', '')">Reload Config file</button></br>
     <button onclick="update('half', '1')">First Half (Defenders left)</button>
-    <button onclick="update('half', '2')">Second Half (Defenders right)</button>
-    <h1 class="tungsten"><img id="logoL" class="logo_s" /> <span id="tnameL">Team Left</span> =<span id="abbrL">LEFT</span></h1>
-    <span id="lscoreL">Maps won: <span id="scoreL"></span></span><button onclick="sendCommand('score-add', 'L')">+</button><button onclick="sendCommand('score-rem', 'L')">-</button>
+    <button onclick="update('half', '2')">Second Half (Defenders right)</button></br>
+    <button onclick="sendCommand('timeout-end')">Stop Timeout</button>
+    <button onclick="sendCommand('timeout-reset')">Reset Timeouts</button>
+    <h1 class="tung"><img id="logoL" class="logo_s" /> <span id="tnameL">Team Left</span> =<span id="abbrL">LEFT</span></h1>
+    <span id="lscoreL">Maps won: <span id="scoreL"></span></span><button onclick="sendCommand('score-add', 'L')">+</button><button onclick="sendCommand('score-rem', 'L')">-</button></br>
+    Timeouts Remaining: <span id="remL"></span> <button onclick="sendCommand('timeout-start', 'L')">Start Timeout</button>
     
-    <h1 class="tungsten"><img id="logoR" class="logo_s" /> <span id="tnameR">Team Right</span> =<span id="abbrR">RAYT</span></h1>
-    <span id="lscoreR">Maps won: <span id="scoreR"></span></span><button onclick="sendCommand('score-add', 'R')">+</button><button onclick="sendCommand('score-rem', 'R')">-</button>
+    <h1 class="tung"><img id="logoR" class="logo_s" /> <span id="tnameR">Team Right</span> =<span id="abbrR">RAYT</span></h1>
+    <span id="lscoreR">Maps won: <span id="scoreR"></span></span><button onclick="sendCommand('score-add', 'R')">+</button><button onclick="sendCommand('score-rem', 'R')">-</button></br>
+    Timeouts Remaining: <span id="remR"></span> <button onclick="sendCommand('timeout-start', 'R')">Start Timeout</button>
 </body>
 </html>

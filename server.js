@@ -21,11 +21,11 @@ let overlayState = {
     "event_stage": "Playoffs: Lower Final",
     "color": "#b6a56d",
     "timeout": {
-      "isActive": "0",
-      "team": "L",
-      "side": "CT",
-      "L_remain": "2",
-      "R_remain": "2"
+        "max": 2,
+        "isActive": 0,
+        "team": "L",
+        "L_remain": 2,
+        "R_remain": 2
     },
     "nameL": "LEVIATÁN",
     "abbrL": "LEV",
@@ -120,6 +120,19 @@ io.on('connection', (socket) => {
                 if (overlayState['score'+data.value] != 0) {
                     overlayState['score'+data.value] --;
                 }
+                break;
+            case 'timeout-start':
+                overlayState.timeout.isActive = 1;
+                overlayState.timeout[data.value+'_remain'] --;
+                overlayState.timeout.team = data.value;
+                break;
+            case 'timeout-end':
+                overlayState.timeout.isActive = 0;
+                break;
+            case 'timeout-reset':
+                overlayState.timeout.isActive = 0;
+                overlayState.timeout.L_remain = overlayState.timeout.max;
+                overlayState.timeout.R_remain = overlayState.timeout.max;
                 break;
             default:
                 console.log('Unknown command:', data.action);
