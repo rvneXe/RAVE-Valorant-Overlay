@@ -54,7 +54,7 @@ body {
 	transition: clip-path 0.5s ease-out;
 }
 .ttt[show] {
-	clip-path: inset(0 0 0 0); /* Fully visible */
+	clip-path: inset(0 0 0 0);
 }
 
 #mptext {
@@ -69,7 +69,13 @@ body {
 	transition: clip-path 0.3s ease-out;
 }
 .mpt[show], .mpl[show]{
-	clip-path: inset(0 0 0 0); /* Fully visible */
+	clip-path: inset(0 0 0 0);
+}
+.base {
+	position: absolute;
+	display: flexbox;
+	text-align: center;
+}
 }
 
 svg {
