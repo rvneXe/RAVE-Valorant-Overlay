@@ -1,8 +1,8 @@
 # RAVE - A VALORANT Overlay
 
-A manually-controlled Observer HUD to be used for Valorant streaming and observing.
+A manually-controlled Observer HUD to be used for Valorant Esports streaming and observation.
 
-Currently, due to VALORANT Client's limitations, there's no automatic game feeds; Everything on this Tool is manually controlled through 2 HTML pages for **Administration** and a **Match setup**. The Overlay itself is accessible as another HTML page, which can be used in OBS Browser Source, for example.
+Currently, due to VALORANT Client's limitations, there's no automatic game feeds; Everything on this Tool is manually controlled through 2 HTML pages for **Administration** and a **Match setup**. The Overlay page can be used in OBS Browser Source or anywhere else.
 
 ## Features
 * Team Information (Name, Logo, Map score) with Side-Switching feature.
