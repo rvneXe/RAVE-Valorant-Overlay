@@ -7,10 +7,12 @@ Currently, due to VALORANT Client's limitations, there's no automatic game feeds
 ## Features
 * Team Information (Name, Logo, Map score) with Side-Switching feature.
 * Timeout indicator (Team, Side and their remaining timeouts)
+* Match Point header (Team Name and their side)
 
 ## Screenshots
 ![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/heading.png?raw=true)
 ![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/timeout.png?raw=true)
+![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/matchpoint.png?raw=true)
 <details><summary>Click to view more</summary>
 
 ![a screenshot](https://github.com/rvneXe/RAVE-Valorant-Overlay/blob/main/screenshots/screenshot1.png?raw=true)
