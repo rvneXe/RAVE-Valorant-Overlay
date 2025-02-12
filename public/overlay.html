@@ -91,6 +91,30 @@
                     element.style.display = "none";
                 });
             }
+
+            if (state.header.isActive == 1) {
+                switch(state.header.type){
+                    case "mp":
+                        document.getElementById('mpname').innerText = state["name"+state.header.team];
+                        document.querySelectorAll('.mpt').forEach(element => {
+                            element.setAttribute("show", "");
+                        });
+                        if ((state.half == 1 && state.header.team == "R") || (state.half == 2 && state.header.team == "L")) {
+                            document.getElementById('mpbg').setAttribute('fill', 'rgb(120, 48, 68)');
+                        } else {
+                            document.getElementById('mpbg').setAttribute('fill', 'rgb(45, 143, 113)');
+                        }
+                        document.getElementById('mpline' + state.header.team).setAttribute("show", "");
+                        
+                }
+            } else {
+                document.querySelectorAll('.mpt').forEach(element => {
+                    element.removeAttribute("show", "");
+                });
+                document.querySelectorAll('.mpl').forEach(element => {
+                    element.removeAttribute("show", "");
+                });
+            }
         }
 
         // Set up the overlay based on the server's state
@@ -157,13 +181,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="40px" 
             style="left: 911px; top: 96px; z-index: 40;">
                 <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
-                    d="M17.999,39.999 L17.0,39.999 L17.0,18.0 L17.0,18.0 L0.0,0.999 L0.999,0.0 L18.0,17.0 L18.0,18.0 L17.999,39.999 Z" />
+                    d="M18,39.999 L17.0,39.999 L17.0,18.0 L17.0,18.0 L0.0,1 L1,0.0 L18.0,17.0 L18.0,18.0 L18,39.999 Z" />
             </svg>
 
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="40px" 
             style="left: 991px; top: 96px; z-index: 40;">
                 <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
-                    d="M0.999,18.0 L0.999,39.999 L0.0,39.999 L0.0,18.0 L0.0,17.0 L17.0,0.0 L18.0,0.999 L0.999,18.0 Z" />
+                    d="M1,18.0 L1,39.999 L0.0,39.999 L0.0,18.0 L0.0,17.0 L17.0,0.0 L18.0,1 L1,18.0 Z" />
             </svg>
             <div class="teamAbbr" id="abbrR" style="left: 1009px; top: 96px; width: 100px; height: 40px; z-index: 41;">
                 LOUD</div>
@@ -175,7 +199,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55px" height="55px" id="logoplateR" 
             style="left: 1109px; top:81px;">
                 <path fill-rule="evenodd" fill="rgb(14, 24, 32)"
-                    d="M54.999,7.999 L46.999,0.0 L7.999,0.0 L0.0,7.999 L0.0,54.999 L46.999,54.999 L54.999,46.999 L54.999,7.999 Z" />
+                    d="M55,8 L47,0.0 L8,0.0 L0.0,8 L0.0,55 L47,55 L55,47 L55,8 Z" />
             </svg>
             <img class="logo" id="logoR" style="left: 1116px; top: 88px;">
         </div>
@@ -190,11 +214,32 @@
                 <img class="diamond" id="mpR2" style="left: 1089px; top: 75px;">
             </div>
         </div>
+        <div id="header">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="371px" height="185px" id="mplineL"
+            class="mpl" style="left: 775px; top: 95px; z-index: 42;">
+                <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                    d="M358,45 L355,42 L153,42 L153,41 L371,41 L371,45 L358,45 ZM135,1 L36,1 L36,0.0 L136,0.0 L138,2 L137,3 L135,1 ZM0.0,41 L1.0,41 L1.0,180.0 L13.0,180.0 L18.0,185.0 L0.0,185.0 L0.0,41 ZM371,180 L371,185 L355,185.0 L359,180.0 L371,180 Z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="371px" height="185px" id="mplineR"
+            class="mpl" style="left: 775px; top: 95px; z-index: 42;">
+                <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                    d="M354,185.0 L359.0,180.0 L370.0,180.0 L370.0,41 L371.0,41 L371.0,185.0 L354,185.0 ZM233,3 L232,2 L234,0.0 L334,0.0 L334,1 L235,1 L233,3 ZM13,45 L0.0,45 L0.0,41 L217,41 L217,42 L15.999,42 L13,45 ZM17,185 L0.0,185 L0.0,180 L12,180 L17,185 Z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="371px" height="144px" id="mpbase"
+            class="mpt" style="left: 775px; top: 136px; z-index: 40;">
+                <path id="mpbg" fill-rule="evenodd" fill="rgb(120, 48, 68)"
+                    d="M0.0,0.0 L371,0.0 L371,144 L343,144 L343,112 L28,112 L28,144 L0.0,144 L0.0,0.0 Z" />
+            </svg>
+            <div style="left: 775px; top: 136px; z-index: 42; text-align: center;" id="mptext" class="mpt">
+                <div class="din0" style="font-size: 28px; color: #ffffff; line-height: 45px;" id="mpname">TEAM</br></div>
+                <div class="tung" style="font-size: 80px; text-align: center; color: #ffffff; line-height: 45px;">MATCH POINT</div>
+            </div>
+        </div>
         <div id="timeout">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600px" height="6px" id="ttline"
             class="ttt" style="left: 661px; top: 383px; z-index: 42;">
                 <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
-                    d="M0.0,6.0 L0.0,0.0 L600.0,0.0 L600.0,6.0 L589.0,6.0 L585.0,2 L15,2 L10.999,6.0 L0.0,6.0 Z" />
+                    d="M0.0,6.0 L0.0,0.0 L600.0,0.0 L600.0,6.0 L589.0,6.0 L585.0,2 L15,2 L11,6.0 L0.0,6.0 Z" />
             </svg>
             <div class="ttt" style="left: 661px; top: 383px; z-index: 40; text-align: center; background-color: rgb(14, 24, 32); " id="ttbase"></div>
             <div style="left: 661px; top: 383px; z-index: 42; text-align: center;" id="tttext" class="ttt">

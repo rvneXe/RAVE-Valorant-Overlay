@@ -50,6 +50,9 @@
         function sendCommand(action, value) {
             socket.emit('admin-command', { action:action, value:value });
         }
+        function header(type, team) {
+            socket.emit('admin-command', { action:'header-start', type:type, team:team });
+        }
 
         function update(target, source) {
             try {
@@ -70,12 +73,15 @@
     <button onclick="update('half', '2')">Second Half (Defenders right)</button></br>
     <button onclick="sendCommand('timeout-end')">Stop Timeout</button>
     <button onclick="sendCommand('timeout-reset')">Reset Timeouts</button>
+    <button onclick="sendCommand('header-end')">Hide Header</button>
     <h1 class="tung"><img id="logoL" class="logo_s" /> <span id="tnameL">Team Left</span> =<span id="abbrL">LEFT</span></h1>
     <span id="lscoreL">Maps won: <span id="scoreL"></span></span><button onclick="sendCommand('score-add', 'L')">+</button><button onclick="sendCommand('score-rem', 'L')">-</button></br>
     Timeouts Remaining: <span id="remL"></span> <button onclick="sendCommand('timeout-start', 'L')">Start Timeout</button>
+    <button onclick="header('mp', 'L')">Display Match Point</button>
     
     <h1 class="tung"><img id="logoR" class="logo_s" /> <span id="tnameR">Team Right</span> =<span id="abbrR">RAYT</span></h1>
     <span id="lscoreR">Maps won: <span id="scoreR"></span></span><button onclick="sendCommand('score-add', 'R')">+</button><button onclick="sendCommand('score-rem', 'R')">-</button></br>
     Timeouts Remaining: <span id="remR"></span> <button onclick="sendCommand('timeout-start', 'R')">Start Timeout</button>
+    <button onclick="header('mp', 'R')">Display Match Point</button>
 </body>
 </html>

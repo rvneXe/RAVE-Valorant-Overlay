@@ -27,6 +27,11 @@ let overlayState = {
         "L_remain": 2,
         "R_remain": 2
     },
+    "header": {
+        "type": "mp",
+        "isActive": 0,
+        "team": "L"
+    },
     "nameL": "LEVIATÁN",
     "abbrL": "LEV",
     "logoL": "./userdata/lev.png",
@@ -133,6 +138,14 @@ io.on('connection', (socket) => {
                 overlayState.timeout.isActive = 0;
                 overlayState.timeout.L_remain = overlayState.timeout.max;
                 overlayState.timeout.R_remain = overlayState.timeout.max;
+                break;
+            case 'header-start':
+                overlayState.header.isActive = 1;
+                overlayState.header.team = data.team;
+                overlayState.header.type = data.type;
+                break;
+            case 'header-end':
+                overlayState.header.isActive = 0;
                 break;
             default:
                 console.log('Unknown command:', data.action);

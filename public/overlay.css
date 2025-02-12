@@ -28,6 +28,10 @@
 	font-family: 'DIN Medium';
 }
 
+body {
+	background-color: brown;
+}
+
 #overlay-frame {
     width: 100vw;
     height: 100vh;
@@ -50,6 +54,21 @@
 	transition: clip-path 0.5s ease-out;
 }
 .ttt[show] {
+	clip-path: inset(0 0 0 0); /* Fully visible */
+}
+
+#mptext {
+	left: 775px; top: 136px; z-index: 42; text-align: center;
+	position: absolute;
+	display: flexbox;
+	width: 371px; 
+	height: 112px; 
+}
+.mpt, .mpl {
+	clip-path: inset(0 0 100% 0);
+	transition: clip-path 0.3s ease-out;
+}
+.mpt[show], .mpl[show]{
 	clip-path: inset(0 0 0 0); /* Fully visible */
 }
 
