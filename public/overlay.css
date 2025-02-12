@@ -76,6 +76,12 @@ body {
 	display: flexbox;
 	text-align: center;
 }
+.tpt {
+	clip-path: inset(0 50% 0 50%);
+	transition: clip-path 0.5s ease-in-out;
+}
+.tpt[show] {
+	clip-path: inset(0 0 0 0);
 }
 
 svg {
