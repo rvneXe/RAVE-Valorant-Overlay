@@ -13,11 +13,11 @@
     <script>
         const socket = io();
 
-        function setMapScore (team, format, score) {
+        function setMapScore(team, format, score) {
             if (format != 'bo5') {
                 let i = score;
                 while (i > 0) {
-                    document.getElementById('mp'+team+i).setAttribute("fill", "");
+                    document.getElementById('mp' + team + i).setAttribute("fill", "");
                     i--;
                 }
 
@@ -29,13 +29,13 @@
             } else {
                 let i = score;
                 while (i > 0) {
-                    document.getElementById('mp'+team+(i-1)).setAttribute("fill", "");
+                    document.getElementById('mp' + team + (i - 1)).setAttribute("fill", "");
                     i--;
                 }
 
                 let j = 2;
                 while (j >= score) {
-                    document.getElementById('mp'+team+j).removeAttribute("fill");
+                    document.getElementById('mp' + team + j).removeAttribute("fill");
                     j--;
                 }
             }
