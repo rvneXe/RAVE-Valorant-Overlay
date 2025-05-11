@@ -20,6 +20,12 @@
                     document.getElementById('mp'+team+i).setAttribute("fill", "");
                     i--;
                 }
+
+                let j = 2;
+                while (j > score) {
+                    document.getElementById('mp' + team + (j)).removeAttribute("fill");
+                    j--;
+                }
             } else {
                 let i = score;
                 while (i > 0) {
